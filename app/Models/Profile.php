@@ -22,6 +22,8 @@ class Profile extends Model
 {
     use HasFactory;
 
+	protected $guarded = [];  
+
     public function users() : HasMany
 	{
 		return $this->hasMany(User::class, "profile_id", "id");
