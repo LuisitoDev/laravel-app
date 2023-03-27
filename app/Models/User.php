@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -39,4 +40,16 @@ class User extends Authenticatable
 	{
         return $this->hasOne(Employee::class, "user_id", "id");
 	}
+
+	public function format()
+    {
+		$this->birthday = $this->employee->birthday;
+		$this->age = Carbon::parse($this->employee->birthday)->age;
+		$this->profile_name = $this->profile->name;
+		$this->created_at_format = $this->created_at->format('d-m-Y h:i');
+		$this->updated_at_format = $this->updated_at->diffForHumans();
+        
+		return $this;
+        
+    }
 }

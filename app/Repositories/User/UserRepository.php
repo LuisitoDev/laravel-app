@@ -20,4 +20,15 @@ class UserRepository{
             "birthday" => $birthday
         ]);
     } 
+
+    public function getAll()
+    {
+        $users = User::query()
+            ->with("employee")
+            ->with("profile")
+            ->get();
+
+        //Validate if users is not empty, to give formate or return empty array
+        return count($users) > 0 ? $users->map->format() : [];
+    }
 }

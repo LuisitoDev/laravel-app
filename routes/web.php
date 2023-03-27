@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route("showHome"));
 });
 
 
@@ -32,3 +34,17 @@ Route::post('/login', [LoginController::class, 'login'])->name('login')->middlew
 Route::get('/home', [HomeController::class, 'showHome'])->name('showHome')->middleware('auth');
 
 Route::get('/sign-out', [LoginController::class, 'logOut'])->name('logOut')->middleware('auth');
+
+Route::get('/profiles', [ProfilesController::class, 'showProfiles'])->name('showProfiles')->middleware('auth');
+
+Route::get('/profile', [ProfilesController::class, 'showCreateProfile'])->name('showCreateProfile')->middleware('auth');
+
+Route::get('/profile/{profile_id}', [ProfilesController::class, 'showUpdateProfile'])->name('showUpdateProfile')->middleware('auth');
+
+Route::post('/profile', [ProfilesController::class, 'createProfile'])->name('createProfile')->middleware('auth');
+
+Route::put('/profile', [ProfilesController::class, 'updateProfile'])->name('updateProfile')->middleware('auth');
+
+Route::delete('/profile', [ProfilesController::class, 'deleteProfile'])->name('deleteProfile')->middleware('auth');
+
+Route::get('/edit-user', [UserController::class, 'showEditUser'])->name('showEditUser')->middleware('auth');

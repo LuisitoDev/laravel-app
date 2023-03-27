@@ -2,29 +2,36 @@
 
 @section('content')
 <div class="row gx-0">
-    <div class="col-4 mx-auto my-4 p-4 border">
-        <h1>Home</h1>
-        <form method="post" action="{{route('login')}}">
-            @csrf
-            <div class="row py-4">
-                <div class="mb-3">
-                    <label for="emailInput" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="emailInput" name="email">
-                    @error("email")
-                    <h6 class="text-danger">{{$message}}</h6>    
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="passwordInput" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="passwordInput" name="password">
-                    @error("password")
-                    <h6 class="text-danger">{{$message}}</h6>    
-                    @enderror
-                </div>
-                <button type="submit" class="btn btn-primary col-3 mx-auto mt-2">Login</button>
-            </div>
-        </form>
-        
+    <div class="col-8 mx-auto my-4 p-4 border">
+        <h1>List of employees</h1>
+        <div class="table-responsive">
+            <table class="table table-lightprimary border-secondary">
+                <thead class="bg-secondary text-light">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Birthday</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Profile</th>
+                        <th scope="col">Creation date</th>
+                        <th scope="col">Last updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($usersList as $user)
+                        <tr>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->birthday}}</td>
+                            <td>{{$user->age}}</td>
+                            <td>{{$user->profile_name}}</td>
+                            <td>{{$user->created_at_format}}</td>
+                            <td>{{$user->updated_at_format}}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @endsection

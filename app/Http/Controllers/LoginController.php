@@ -34,31 +34,25 @@ class LoginController extends Controller
     }
 
     public function login(Request $request) {
-        try{
-            $request->validate([
-                'email' => 'required',
-                'password' => 'required'
-            ]);
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
 
-            $credentials = $request->only('email', 'password');
+        $credentials = $request->only('email', 'password');
 
-            if (Auth::attempt($credentials)){
-                $request->session()->regenerate();
+        if (Auth::attempt($credentials)){
+            $request->session()->regenerate();
 
-                return redirect()->intended(route("showHome"));
-            }
-
-
-            return Redirect::back()->withErrors(
-                [
-                    'loginFail' => 'The email or the password may be incorrect'
-                ]
-            );
+            return redirect()->intended(route("showHome"));
         }
-        catch(Exception $exception){
-            return view('error', ['error' => $exception]);
-        }
-    
+
+
+        return Redirect::back()->withErrors(
+            [
+                'loginFail' => 'The email or the password may be incorrect'
+            ]
+        );
     }
 
 }

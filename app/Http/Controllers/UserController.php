@@ -6,7 +6,7 @@ use App\Repositories\User\UserRepository;
 use Exception;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class UserController extends Controller
 {
     private $userRepository;
 
@@ -16,7 +16,7 @@ class HomeController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function showHome() {
+    public function showEditUser() {
         try{
             $usersList = $this->userRepository->getAll();
 

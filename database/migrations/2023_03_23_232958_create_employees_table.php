@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->bigInteger('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
+            $table->bigInteger('user_id')->unsigned();
             $table->date("birthday");
             $table->timestamps();
         });

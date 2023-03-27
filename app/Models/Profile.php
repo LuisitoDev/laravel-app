@@ -28,4 +28,13 @@ class Profile extends Model
 	{
 		return $this->hasMany(User::class, "profile_id", "id");
 	}
+
+	public function format()
+    {
+		$this->created_at_format = $this->created_at->format('d-m-Y h:i');
+		$this->updated_at_format = $this->updated_at->diffForHumans();
+		$this->countUsers = $this->users->count();
+
+		return $this;        
+    }
 }
