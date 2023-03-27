@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\ProfilesNotFoundException;
 use App\Repositories\Profile\ProfileRepository;
 use App\Repositories\User\UserRepository;
-use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class SignUpController extends Controller
 {
@@ -49,7 +46,7 @@ class SignUpController extends Controller
         $userCreated = $this->userRepository->save(
             $request->name,
             $request->email,
-            Hash::make($request->password),
+            $request->password,
             $request->profile,
             $request->birthday,
         );

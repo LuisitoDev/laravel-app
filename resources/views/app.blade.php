@@ -27,7 +27,7 @@
                     @else
                     <a class="nav-link" href="{{route('showHome')}}">Home</a>
                     <a class="nav-link" href="{{route('showProfiles')}}">Profiles</a>
-                    <a class="nav-link" href="{{route('showEditUser')}}">Edit User</a>
+                    <a class="nav-link" href="{{route('showUpdateUser')}}">User Info</a>
                     <a class="nav-link" href="{{route('logOut')}}">Sign Out</a>
                     @endguest
                     

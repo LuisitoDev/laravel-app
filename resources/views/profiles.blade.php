@@ -23,9 +23,6 @@
                                     <div>
                                         <a class="btn btn-success" href="{{ route('showUpdateProfile', $profile->id) }}"><i class="fa fa-pen text-white"></i></a>
                                         <button id="" class="btn btn-danger delete" data-id="{{$profile->id}}" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-trash text-white"></i></button>
-                                        {{-- <button type="button" class="btn btn-primary" >
-                                            Launch demo modal
-                                          </button> --}}
                                     </div>
 
                                 </td>

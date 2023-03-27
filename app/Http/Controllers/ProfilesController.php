@@ -67,19 +67,13 @@ class ProfilesController extends Controller
             'id' => 'required|exists:profiles,id',
             'name' => 'required|max:255'
         ]);
-
-        Log::info("request->id");
-        Log::info($request->id);
         
-        $profileCreated = $this->profileRepository->update(
+        $profileUpdated = $this->profileRepository->update(
             $request->id,
             $request->name,
         );
 
-        Log::info("profileCreated");
-        Log::info($profileCreated);
-
-        // if ($profileCreated == true)
+        if ($profileUpdated == true)
             return redirect(route("showProfiles"));
     }
 

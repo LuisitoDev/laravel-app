@@ -47,4 +47,8 @@ Route::put('/profile', [ProfilesController::class, 'updateProfile'])->name('upda
 
 Route::delete('/profile', [ProfilesController::class, 'deleteProfile'])->name('deleteProfile')->middleware('auth');
 
-Route::get('/edit-user', [UserController::class, 'showEditUser'])->name('showEditUser')->middleware('auth');
+Route::get('/user', [UserController::class, 'showUpdateUser'])->name('showUpdateUser')->middleware('auth');
+
+Route::put('/user', [UserController::class, 'updateUser'])->name('updateUser')->middleware('auth');
+
+Route::delete('/user', [UserController::class, 'deleteUser'])->name('deleteUser')->middleware('auth');
