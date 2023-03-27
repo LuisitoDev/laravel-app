@@ -22,33 +22,41 @@ Route::get('/', function () {
     return redirect(route("showHome"));
 });
 
+Route::middleware('guest')->group(function () {
+ 
+    Route::get('/sign-up', [SignUpController::class, 'showSignUp'])->name('showSignUp');
 
-Route::get('/sign-up', [SignUpController::class, 'showSignUp'])->name('showSignUp')->middleware('guest');
+    Route::get('/login', [LoginController::class, 'showLogin'])->name('showLogin');
 
-Route::get('/login', [LoginController::class, 'showLogin'])->name('showLogin')->middleware('guest');
+    Route::post('/sign-up', [SignUpController::class, 'signUp'])->name('signUp');
 
-Route::post('/sign-up', [SignUpController::class, 'signUp'])->name('signUp')->middleware('guest');
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
+});
 
-Route::post('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [HomeController::class, 'showHome'])->name('showHome');
 
-Route::get('/home', [HomeController::class, 'showHome'])->name('showHome')->middleware('auth');
+    Route::get('/sign-out', [LoginController::class, 'logOut'])->name('logOut');
 
-Route::get('/sign-out', [LoginController::class, 'logOut'])->name('logOut')->middleware('auth');
+    Route::get('/profiles', [ProfilesController::class, 'showProfiles'])->name('showProfiles');
 
-Route::get('/profiles', [ProfilesController::class, 'showProfiles'])->name('showProfiles')->middleware('auth');
+    Route::get('/profile', [ProfilesController::class, 'showCreateProfile'])->name('showCreateProfile');
 
-Route::get('/profile', [ProfilesController::class, 'showCreateProfile'])->name('showCreateProfile')->middleware('auth');
+    Route::get('/profile/{profile_id}', [ProfilesController::class, 'showUpdateProfile'])->name('showUpdateProfile');
 
-Route::get('/profile/{profile_id}', [ProfilesController::class, 'showUpdateProfile'])->name('showUpdateProfile')->middleware('auth');
+    Route::get('/user', [UserController::class, 'showUpdateUser'])->name('showUpdateUser');
 
-Route::post('/profile', [ProfilesController::class, 'createProfile'])->name('createProfile')->middleware('auth');
+    Route::post('/profile', [ProfilesController::class, 'createProfile'])->name('createProfile');
 
-Route::put('/profile', [ProfilesController::class, 'updateProfile'])->name('updateProfile')->middleware('auth');
+    Route::put('/profile', [ProfilesController::class, 'updateProfile'])->name('updateProfile');
 
-Route::delete('/profile', [ProfilesController::class, 'deleteProfile'])->name('deleteProfile')->middleware('auth');
+    Route::put('/user', [UserController::class, 'updateUser'])->name('updateUser');
 
-Route::get('/user', [UserController::class, 'showUpdateUser'])->name('showUpdateUser')->middleware('auth');
+    Route::delete('/profile', [ProfilesController::class, 'deleteProfile'])->name('deleteProfile');
 
-Route::put('/user', [UserController::class, 'updateUser'])->name('updateUser')->middleware('auth');
+    Route::delete('/user', [UserController::class, 'deleteUser'])->name('deleteUser');
+});
 
-Route::delete('/user', [UserController::class, 'deleteUser'])->name('deleteUser')->middleware('auth');
+
+
+
